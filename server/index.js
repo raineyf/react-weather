@@ -12,7 +12,7 @@ app.listen(PORT, () => {
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.get("/api", (req, res) => {
-    res.json({ message: "Make requests to the server at /api" });
+    res.json({ message: "You are connected to the server" });
 });
 
 app.get("*", (req, res) => {
