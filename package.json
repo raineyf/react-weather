@@ -8,7 +8,8 @@
     },
     "main": "index.js",
     "scripts": {
-        "start": "npm install && cd client && npm install && echo \"start your dev environment by running npm run dev\"",
+        "setup": "npm install && cd client && npm install && echo \"start your dev environment by running npm run dev\"",
+        "start": "node server/index.js",
         "server": "node server/index.js",
         "client": "cd client && npm start",
         "build": "cd client && npm install && npm run build",
