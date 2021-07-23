@@ -1,0 +1,26 @@
+{
+    "name": "node-react-heroku",
+    "version": "1.0.0",
+    "description": "",
+    "engines": {
+        "node": ">= 14.17.1",
+        "npm": ">= 6.14.13"
+    },
+    "main": "index.js",
+    "scripts": {
+        "start": "npm install && cd client && npm install && echo \"start your dev environment by running npm run dev\"",
+        "server": "node server/index.js",
+        "client": "cd client && npm start",
+        "build": "cd client && npm install && npm run build",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "concurrently": "^6.2.0"
+    }
+}
