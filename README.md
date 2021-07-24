@@ -21,8 +21,8 @@ git push heroku master
 
 ## About
 
-**Node Version:** `>= 14.17.1`
-**npm Version:** `>= 6.14.13`
+-   **Node Version:** `>= 14.17.1`
+-   **npm Version:** `>= 6.14.13`
 
 **Dev Dependencies** (not including `create-react-app` dependencies):
 
