@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Locator from "./components/Locator";
 
 function App() {
     const [data, setData] = useState(null);
@@ -11,10 +12,10 @@ function App() {
     return (
         <div>
             <header>
-                <h1>Your Node & React App</h1>
+                <h1>Weather</h1>
             </header>
             <main>
-                <p>{!data ? "Loading..." : data}</p>
+                <Locator />
             </main>
         </div>
     );
