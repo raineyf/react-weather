@@ -15,6 +15,10 @@ app.get("/api", (req, res) => {
     res.json({ message: "You are connected to the server" });
 });
 
+app.get("/locations", (req, res) => {
+    res.json({ locations: "Cincinnati" });
+});
+
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });

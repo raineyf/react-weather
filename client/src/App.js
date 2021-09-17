@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Locator from "./components/Locator";
+import WeatherApp from "./components/WeatherApp";
 
 function App() {
     const [data, setData] = useState(null);
@@ -9,16 +9,7 @@ function App() {
             .then((res) => res.json())
             .then((data) => setData(data.message));
     }, []);
-    return (
-        <div>
-            <header>
-                <h1>Weather</h1>
-            </header>
-            <main>
-                <Locator />
-            </main>
-        </div>
-    );
+    return <WeatherApp />;
 }
 
 export default App;

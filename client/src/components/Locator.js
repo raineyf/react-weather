@@ -2,75 +2,52 @@ import React, { useState, useEffect } from "react";
 
 function Locator() {
     const geolocationAvailable = "geolocation" in navigator;
+    const [location, setLocation] = useState("");
+    const [locations, setLocations] = useState([]);
+    const handleLocationChange = (e) => {
+        setLocation(e.target.value);
+        if (!location) {
+            console.log("No Location");
+        }
+        fetch("/locations")
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+        // console.log(locations);
+    };
     return (
-        <div>
-            <h2>Where do you need weather data for?</h2>
-            <p>
-                {geolocationAvailable
-                    ? "geolocation available!"
-                    : "no geolocation available"}
-            </p>
+        <form aria-labelledby="form-legend">
             <fieldset>
-                <legend>How should we get your weather data?</legend>
+                <legend id="form-legend">
+                    How should we get your weather?
+                </legend>
                 {geolocationAvailable && (
-                    <div>
-                        <div className="radio-container">
-                            <input
-                                type="radio"
-                                name="location"
-                                id="geolocation"
-                                value="geolocation"
-                                defaultChecked
-                            />
-                            <label htmlFor="geolocation">
-                                Use My Current Location
-                            </label>
-                        </div>
-                        <div className="radio-container">
-                            <input
-                                type="radio"
-                                name="location"
-                                id="zip"
-                                value="zip"
-                            />
-                            <label htmlFor="zip">Input ZIP</label>
-                        </div>
-                        <div className="radio-container">
-                            <input
-                                type="radio"
-                                name="location"
-                                id="city"
-                                value="city"
-                            />
-                            <label htmlFor="city">Input City</label>
-                        </div>
+                    <div className="form-row">
+                        <button>Use my Current Location</button>
                     </div>
                 )}
-                {!geolocationAvailable && (
-                    <div>
-                        <div className="radio-container">
-                            <input
-                                type="radio"
-                                name="location"
-                                id="zip"
-                                value="zip"
-                                defaultChecked
-                            />
-                            <label htmlFor="zip">Input ZIP</label>
-                        </div>
-                        <div className="radio-container">
-                            <input
-                                type="radio"
-                                name="location"
-                                id="city"
-                                value="city"
-                            />
-                            <label htmlFor="city">Input City</label>
-                        </div>
-                    </div>
-                )}
+                <div className="form-row">
+                    <label htmlFor="location">Search for a Location:</label>
+                    <input
+                        type="text"
+                        list="locations"
+                        name="location"
+                        id="location"
+                        value={location}
+                        placeholder="For example, New York City"
+                        onChange={handleLocationChange}
+                    />
+                    <datalist id="locations">
+                        <option>Chicago</option>
+                        <option>Cleveland</option>
+                        <option>Columbus</option>
+                        <option>Cincinnati</option>
+                    </datalist>
+                </div>
+                <div className="form-row">
+                    <button type="submit">Submit Location</button>
+                </div>
             </fieldset>
-        </div>
+        </form>
     );
 }
 
