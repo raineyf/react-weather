@@ -9,11 +9,13 @@ function Locator() {
         if (!location) {
             console.log("No Location");
         }
-        fetch("/locations")
-            .then((res) => res.json())
-            .then((data) => console.log(data));
-        // console.log(locations);
     };
+    useEffect(() => {
+        const url = "/locations/" + new URLSearchParams({ string: location });
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => setLocations(data));
+    }, [location]);
     return (
         <form aria-labelledby="form-legend">
             <fieldset>

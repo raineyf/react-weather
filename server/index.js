@@ -15,8 +15,14 @@ app.get("/api", (req, res) => {
     res.json({ message: "You are connected to the server" });
 });
 
-app.get("/locations", (req, res) => {
-    res.json({ locations: "Cincinnati" });
+app.get("/locations/:string", (req, res) => {
+    const string = req.params.string;
+    res.json({ locations: req.params.string });
+    //    fetch(
+    //      ``
+    //  )
+    //    .then((response) => response.json())
+    //  .then((data) => res.json(data));
 });
 
 app.get("*", (req, res) => {
