@@ -1,8 +1,8 @@
 const path = require("path");
 const express = require("express");
-
+const fetch = require("node-fetch");
+require("dotenv").config();
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 app.listen(PORT, () => {
@@ -17,12 +17,11 @@ app.get("/api", (req, res) => {
 
 app.get("/locations/:string", (req, res) => {
     const string = req.params.string;
-    res.json({ locations: req.params.string });
-    //    fetch(
-    //      ``
-    //  )
-    //    .then((response) => response.json())
-    //  .then((data) => res.json(data));
+    fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${process.env.MB_KY}&cachebuster=1625641871908&autocomplete=true&types=place`
+    )
+        .then((response) => response.json())
+        .then((data) => res.json(data));
 });
 
 app.get("*", (req, res) => {

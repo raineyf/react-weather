@@ -11,10 +11,21 @@ function Locator() {
         }
     };
     useEffect(() => {
-        const url = "/locations/" + new URLSearchParams({ string: location });
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => setLocations(data));
+        if (location != "") {
+            const url =
+                "/locations/" +
+                new URLSearchParams({ string: location }).get("string");
+            fetch(url)
+                .then((res) => res.json())
+                .then((data) => {
+                    let placeResults = [];
+                    data.features.forEach((result) => {
+                        placeResults.push(result.place_name);
+                    });
+                    setLocations(placeResults);
+                    console.log(locations);
+                });
+        }
     }, [location]);
     return (
         <form aria-labelledby="form-legend">
@@ -37,12 +48,12 @@ function Locator() {
                         value={location}
                         placeholder="For example, New York City"
                         onChange={handleLocationChange}
+                        pattern={locations.join("|")}
                     />
                     <datalist id="locations">
-                        <option>Chicago</option>
-                        <option>Cleveland</option>
-                        <option>Columbus</option>
-                        <option>Cincinnati</option>
+                        {locations.map((place, i) => (
+                            <option key={i}>{place}</option>
+                        ))}
                     </datalist>
                 </div>
                 <div className="form-row">
