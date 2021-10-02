@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function Locator() {
     const geolocationAvailable = "geolocation" in navigator;
     const [location, setLocation] = useState("");
     const [locations, setLocations] = useState([]);
-    const handleLocationChange = (e) => {
+    const handleLocationChange = async (e) => {
         setLocation(e.target.value);
-        if (!location) {
-            console.log("No Location");
-        }
-    };
-    useEffect(() => {
-        if (location != "") {
+        setLocations([]);
+        if (e.target.value.length >= 1) {
             const url =
                 "/locations/" +
-                new URLSearchParams({ string: location }).get("string");
-            fetch(url)
-                .then((res) => res.json())
-                .then((data) => {
-                    let placeResults = [];
-                    data.features.forEach((result) => {
-                        placeResults.push(result.place_name);
-                    });
-                    setLocations(placeResults);
-                    console.log(locations);
-                });
+                new URLSearchParams({ string: e.target.value }).get("string");
+            const res = await fetch(url);
+            const data = await res.json();
+            !locations.includes(e.target.value) &&
+                data.features &&
+                setLocations(data.features.map((result) => result.place_name));
         }
-    }, [location]);
+    };
     return (
         <form aria-labelledby="form-legend">
             <fieldset>
@@ -49,10 +40,11 @@ function Locator() {
                         placeholder="For example, New York City"
                         onChange={handleLocationChange}
                         pattern={locations.join("|")}
+                        autoComplete="off"
                     />
                     <datalist id="locations">
                         {locations.map((place, i) => (
-                            <option key={i}>{place}</option>
+                            <option key={i} value={place} />
                         ))}
                     </datalist>
                 </div>
