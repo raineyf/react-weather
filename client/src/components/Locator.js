@@ -18,6 +18,19 @@ function Locator() {
                 setLocations(data.features.map((result) => result.place_name));
         }
     };
+    const useCurrentLocation = (e) => {
+        e.preventDefault();
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const latlon =
+                position.coords.latitude + "," + position.coords.longitude;
+            const url =
+                "/weather/" +
+                new URLSearchParams({ latlon: latlon }).get("latlon");
+            const res = await fetch(url);
+            const data = await res.json();
+            console.log(data);
+        });
+    };
     return (
         <form aria-labelledby="form-legend">
             <fieldset>
@@ -26,7 +39,9 @@ function Locator() {
                 </legend>
                 {geolocationAvailable && (
                     <div className="form-row">
-                        <button>Use my Current Location</button>
+                        <button onClick={useCurrentLocation}>
+                            Use my Current Location
+                        </button>
                     </div>
                 )}
                 <div className="form-row">

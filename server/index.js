@@ -24,6 +24,17 @@ app.get("/locations/:string", (req, res) => {
         .then((data) => res.json(data));
 });
 
+app.get("/weather/:latlon", (req, res) => {
+    const latlon = req.params.latlon;
+    const latitude = latlon.split(",")[0];
+    const longitude = latlon.split(",")[1];
+    fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,alerts&appid=${process.env.OWM_KY}&units=imperial`
+    )
+        .then((response) => response.json())
+        .then((data) => res.json(data));
+});
+
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
