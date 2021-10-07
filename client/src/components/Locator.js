@@ -6,7 +6,6 @@ function Locator() {
     const [locations, setLocations] = useState([]);
     const handleLocationChange = async (e) => {
         setLocation(e.target.value);
-        setLocations([]);
         if (e.target.value.length >= 1) {
             const url =
                 "/locations/" +
@@ -31,8 +30,11 @@ function Locator() {
             console.log(data);
         });
     };
+    const formSubmit = (e) => {
+        e.preventDefault();
+    };
     return (
-        <form aria-labelledby="form-legend">
+        <form onSubmit={formSubmit} aria-labelledby="form-legend">
             <fieldset>
                 <legend id="form-legend">
                     How should we get your weather?
