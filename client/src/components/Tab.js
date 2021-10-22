@@ -7,6 +7,9 @@ function Tab(props) {
             aria-selected={props.selected && "true"}
             tabIndex={props.selected ? "0" : "-1"}
             onClick={props.onClick}
+            onKeyDown={props.onKeyDown}
+            aria-controls={props.ariaControls}
+            id={props.id}
         >
             {props.label}
         </button>
