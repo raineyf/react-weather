@@ -13,7 +13,6 @@ function WeatherPanels(props) {
     const handleDailyClick = () => {
         setSelectedTab("daily");
     };
-    console.log(props.weather);
 
     const tabs = useRef(null);
 
@@ -50,7 +49,6 @@ function WeatherPanels(props) {
             }
         }
     };
-    console.log(tabs.current);
     return (
         <>
             {props.location.length > 0 && <h2>Weather in {props.location}</h2>}
@@ -94,6 +92,7 @@ function WeatherPanels(props) {
                         ariaLabelledBy="currentTab"
                         active={selectedTab === "current"}
                         label="Current Weather"
+                        weatherData={props.weather.current}
                     />
                 )}
                 {props.weather.hourly && (
@@ -102,6 +101,7 @@ function WeatherPanels(props) {
                         ariaLabelledBy="hourlyTab"
                         active={selectedTab === "hourly"}
                         label="Hourly Weather"
+                        weatherData={props.weather.hourly}
                     />
                 )}
                 {props.weather.daily && (
@@ -110,6 +110,7 @@ function WeatherPanels(props) {
                         ariaLabelledBy="dailyTab"
                         active={selectedTab === "daily"}
                         label="Daily Weather"
+                        weatherData={props.weather.daily}
                     />
                 )}
             </div>
