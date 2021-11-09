@@ -4,7 +4,7 @@ import Locator from "./Locator";
 function WeatherApp() {
     return (
         <>
-            <h1>My Weather</h1>
+            <h1>React Weather App</h1>
             <Locator />
         </>
     );
