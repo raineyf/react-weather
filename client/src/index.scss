@@ -1,17 +1,37 @@
+@import "./utils/normalize.css";
+
+$lt-blue: #8ebacd;
+$dark-grey: #0f0f0f;
+$green: #476827;
+$primary-bg: $lt-blue;
+$primary-font: $dark-grey;
+$button-bg: $green;
+$button-color: white;
+
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: #8ebacd;
+    background: $primary-bg;
+    color: $primary-font;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+button {
+    background: $button-bg;
+    color: $button-color;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    &:hover {
+        cursor: pointer;
+    }
+    &:focus {
+        border: solid $primary-font;
+    }
 }
+
 .hidden {
     display: none;
+}
+
+*:focus {
+    outline: 4px dotted $primary-font;
+    outline-offset: 2px;
 }
