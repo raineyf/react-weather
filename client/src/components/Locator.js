@@ -134,15 +134,13 @@ function Locator() {
                                 ))}
                             </datalist>
                         </div>
-                        {error !== "" && (
-                            <p
-                                className="locations-error"
-                                id="locations-error"
-                                aria-live="polite"
-                            >
-                                {error}
-                            </p>
-                        )}
+                        <p
+                            className="locations-error"
+                            id="locations-error"
+                            aria-live="polite"
+                        >
+                            {error !== "" && error}
+                        </p>
                         <div className="form-row">
                             <button type="submit">Submit Location</button>
                         </div>
