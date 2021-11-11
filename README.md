@@ -1,34 +1,17 @@
-# node-react-heroku
+# react-weather
 
-This is a repo meant to provide boilerplate for a Node.js (backend) and React (frontend) project built for the Heroku cloud.
+This is a weather web application built on Node.js and React.js. The published version can be found at [https://rainey-weather.herokuapp.com/](https://rainey-weather.herokuapp.com/).
 
-## Setup
+## Support
 
--   Fork this repo, download locally and run `npm run setup` to install the necessary packages.
--   Change the directory name and `name` value in `package.json`.
--   Run `npm run dev` to start your local server and find your React app running at port 3000. The server is running at port 3001. You should see the message "You are connected to the server" in your React app.
--   When you are ready to build your app for Heroku, use the Heroku CLI (`sudo npm i -g heroku`) and login with `heroku login`.
--   Initialize a new Git repo: `git init`, `heroku git:remote -a insert-your-app-name-here`, `git add .`, `git commit -am "Deploy app to Heroku"`.
--   Finally, push to the Git Heroku remote: `git push heroku master`.
+In addition to Node.js and React.js. This project is made possible by [Heroku](https://www.heroku.com/home), [OpenWeatherMap](https://openweathermap.org/api), and [Mapbox](https://www.mapbox.com/).
 
-## Pushing New Changes
+## Accessibility
 
-```
-git add .
-git commit -m "my commit message"
-git push heroku master
-```
+Tested with NVDA and JAWS in Chrome and Firefox. Additional automated testing by axe browser dev tools. No major blockers found.
 
-## About
+In future iterations, however, more detailed guidance and error messaging can be provided for the "Search for a location" field. A `<datalist>` is operable, but it's not clear to non-sighted users how to operate it.
 
--   **Node Version:** `>= 14.17.1`
--   **npm Version:** `>= 6.14.13`
+## Notes
 
-**Dev Dependencies** (not including `create-react-app` dependencies):
-
--   `concurrently` - used to run server and client at the same time
--   `node-sass` - used to support SASS in client
-
-## Resources
-
--   [How to Create a React App with a Node Backend: The Complete Guide](https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/)
+-   This application was cloned from [node-react-heroku](https://github.com/raineyf/node-react-heroku), a boilerplate project to create Node/React projects for Heroku. More information about local development and deployment can be found there.
