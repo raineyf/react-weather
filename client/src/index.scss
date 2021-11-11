@@ -1,29 +1,26 @@
 @import "./utils/normalize.css";
+@import "./utils/fonts.css";
 
 $lt-blue: #8ebacd;
 $dark-grey: #0f0f0f;
 $green: #476827;
 $primary-bg: $lt-blue;
 $primary-font: $dark-grey;
+$tab-bg: $dark-grey;
 $button-bg: $green;
 $button-color: white;
 
 body {
     background: $primary-bg;
     color: $primary-font;
+    font-family: Inconsolata;
 }
 
 button {
-    background: $button-bg;
-    color: $button-color;
     border: none;
-    border-radius: 5px;
-    padding: 15px;
+    padding: 12px 25px;
     &:hover {
         cursor: pointer;
-    }
-    &:focus {
-        border: solid $primary-font;
     }
 }
 
@@ -34,4 +31,160 @@ button {
 *:focus {
     outline: 4px dotted $primary-font;
     outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Karla;
+}
+
+.app-container {
+    margin: 0 auto;
+    width: calc(100% - 20px);
+    max-width: 1280px;
+    h1 {
+        text-align: center;
+        font-size: 2.5rem;
+    }
+    h2 {
+        text-align: center;
+    }
+    .tablist {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        button {
+            width: calc(100% / 3);
+            border-radius: 10px 10px 0 0;
+            background: white;
+            &:focus {
+                outline: 2px solid $primary-font;
+                outline-offset: 2px;
+            }
+            &[tabindex="0"] {
+                background: $tab-bg;
+                color: white;
+            }
+        }
+    }
+    .tabpanels {
+        padding: 20px 0;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 5px solid $primary-font;
+        background: white;
+        box-sizing: border-box;
+        .tabpanel {
+            .section-container {
+                width: calc(100% - 60px);
+                margin: 10px auto;
+                border-radius: 20px;
+                border: 1px solid black;
+                padding: 20px;
+                box-sizing: border-box;
+                background: #8ebacd;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                @media (min-width: 700px) {
+                    flex-direction: row;
+                    flex-flow: row;
+                }
+                .date-container {
+                    border-bottom: 1px solid $primary-font;
+                    text-align: center;
+                    @media (min-width: 700px) {
+                        border-right: 1px solid $primary-font;
+                        border-bottom: none;
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        padding: 0 20px;
+                    }
+                    h3 {
+                        margin: 0;
+                    }
+                }
+                .weather-main-container {
+                    text-align: center;
+                    border-bottom: 1px solid $primary-font;
+                    @media (min-width: 700px) {
+                        border-right: 1px solid $primary-font;
+                        border-bottom: none;
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        padding: 0 20px;
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+                .weather-details-container {
+                    @media (min-width: 700px) {
+                        width: 100%;
+                        padding: 0 20px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+    .change-button {
+        display: block;
+        margin: 10px auto 40px;
+        background: $button-bg;
+        border-radius: 5px;
+        color: $button-color;
+        box-shadow: 0px 3px 10px black;
+        &:hover {
+            box-shadow: none;
+        }
+        &:focus {
+            border: solid $primary-font;
+        }
+    }
+}
+
+form {
+    text-align: center;
+    font-size: 1.2rem;
+    fieldset {
+        border: 1px solid $primary-font;
+        border-radius: 10px;
+        legend {
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .form-row {
+            margin: 10px 0;
+            button {
+                background: $button-bg;
+                border-radius: 5px;
+                color: $button-color;
+                box-shadow: 0px 3px 10px black;
+                &:hover {
+                    box-shadow: none;
+                }
+                &:focus {
+                    border: solid $primary-font;
+                }
+            }
+            p {
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+            input {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    }
 }

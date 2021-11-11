@@ -2,9 +2,13 @@ import React from "react";
 
 function WeatherSection(props) {
     return (
-        <div>
+        <div className="section-container">
             <div className="date-container">
-                <h3>{props.time}</h3>
+                <h3>
+                    {props.maxTemp
+                        ? props.time.slice(0, props.time.lastIndexOf(","))
+                        : props.time}
+                </h3>
             </div>
             <div className="weather-main-container">
                 <div className="description">

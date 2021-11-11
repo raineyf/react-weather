@@ -47,9 +47,8 @@ function TabPanel(props) {
             aria-labelledby={props.ariaLabelledBy}
             id={props.id}
             tabIndex={props.active ? "0" : "-1"}
-            className={props.active ? "" : "hidden"}
+            className={props.active ? "tabpanel" : "tabpanel hidden"}
         >
-            {props.label}
             {props.id === "currentPanel" && (
                 <WeatherSection
                     time={convertTime(props.weatherData.dt)}

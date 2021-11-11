@@ -53,7 +53,12 @@ function WeatherPanels(props) {
         <>
             {props.location.length > 0 && <h2>Weather in {props.location}</h2>}
             {props.location.length === 0 && <h2>Your Weather</h2>}
-            <div role="tablist" aria-label="weather" ref={tabs}>
+            <div
+                role="tablist"
+                className="tablist"
+                aria-label="weather"
+                ref={tabs}
+            >
                 {props.weather.current && (
                     <Tab
                         label="Current"

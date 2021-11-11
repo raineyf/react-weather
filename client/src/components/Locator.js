@@ -55,7 +55,7 @@ function Locator() {
                 <form onSubmit={handleFormSubmit} aria-labelledby="form-legend">
                     <fieldset>
                         <legend id="form-legend">
-                            How should we get your weather?
+                            Please provide a location
                         </legend>
                         {geolocationAvailable && (
                             <div className="form-row">
@@ -64,6 +64,9 @@ function Locator() {
                                 </button>
                             </div>
                         )}
+                        <div className="form-row">
+                            <p>- or -</p>
+                        </div>
                         <div className="form-row">
                             <label htmlFor="location">
                                 Search for a Location:
@@ -95,7 +98,9 @@ function Locator() {
                 <WeatherPanels location={location} weather={weather} />
             )}
             {Object.keys(weather).length > 0 && (
-                <button onClick={handleNewLocation}>Change Location</button>
+                <button className="change-button" onClick={handleNewLocation}>
+                    Change Location
+                </button>
             )}
         </>
     );
