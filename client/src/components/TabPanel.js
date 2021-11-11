@@ -2,7 +2,6 @@ import React from "react";
 import WeatherSection from "./WeatherSection.js";
 
 function TabPanel(props) {
-    console.log(props.weatherData);
     const convertTime = (unixTime) => {
         const date = new Date(unixTime * 1000);
         const months = [

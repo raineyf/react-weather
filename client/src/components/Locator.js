@@ -7,6 +7,7 @@ function Locator() {
     const [locations, setLocations] = useState([]);
     const [latLon, setLatLon] = useState("");
     const [weather, setWeather] = useState({});
+    const [error, setError] = useState("");
     const handleLocationChange = async (e) => {
         setLocation(e.target.value);
         if (e.target.value.length >= 1) {
@@ -39,6 +40,11 @@ function Locator() {
     };
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        if (location === "") {
+            setError("Please select a valid location");
+            return;
+        }
+        setError("");
         const url =
             "/weather/" + new URLSearchParams({ latlon: latLon }).get("latlon");
         const res = await fetch(url);
@@ -81,13 +87,24 @@ function Locator() {
                                 onChange={handleLocationChange}
                                 pattern={locations.join("|")}
                                 autoComplete="off"
+                                aria-describedby="locations-error"
                             />
+
                             <datalist id="locations">
                                 {locations.map((place, i) => (
                                     <option key={i} value={place} />
                                 ))}
                             </datalist>
                         </div>
+                        {error !== "" && (
+                            <p
+                                className="locations-error"
+                                id="locations-error"
+                                aria-live="polite"
+                            >
+                                {error}
+                            </p>
+                        )}
                         <div className="form-row">
                             <button type="submit">Submit Location</button>
                         </div>
