@@ -19,13 +19,13 @@ function TabPanel(props) {
             "December",
         ];
         const days = [
+            "Sunday",
             "Monday",
             "Tuesday",
             "Wednesday",
             "Thursday",
             "Friday",
             "Saturday",
-            "Sunday",
         ];
         const readableDate =
             days[date.getDay()] +
