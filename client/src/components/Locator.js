@@ -9,6 +9,8 @@ function Locator() {
     const [locations, setLocations] = useState([]);
     const [weather, setWeather] = useState({});
     const [error, setError] = useState("");
+    const [weatherURL, setWeatherURL] = useState("");
+    const [locationsURL, setLocationsURL] = useState("");
 
     const geolocationAvailable = () => {
         if ("geolocation" in navigator) {
@@ -44,42 +46,36 @@ function Locator() {
         return data;
     };
 
-    const handleLocationChange = async (e) => {
+    const handleLocationChange = (e) => {
         setLocation(e.target.value);
         if (e.target.value.length >= 1) {
-            const url =
+            setLocationsURL(
                 "/locations/" +
-                new URLSearchParams({ string: e.target.value }).get("string");
-            const data = await fetchData(url);
-            !locations.includes(e.target.value) &&
-                data.features &&
-                setLocations(data.features.map((result) => result.place_name));
-            const lat = data.features[0].geometry.coordinates[1];
-            const lon = data.features[0].geometry.coordinates[0];
-            setLatLon(lat + "," + lon);
+                    new URLSearchParams({ string: e.target.value }).get(
+                        "string"
+                    )
+            );
         }
     };
 
-    const useCurrentLocation = async (e) => {
+    const useCurrentLocation = (e) => {
         e.preventDefault();
-        const url =
+        setWeatherURL(
             "/weather/" +
-            new URLSearchParams({ latlon: currentLatLon }).get("latlon");
-        const data = await fetchData(url);
-        setWeather(data);
+                new URLSearchParams({ latlon: currentLatLon }).get("latlon")
+        );
     };
 
-    const handleFormSubmit = async (e) => {
+    const handleFormSubmit = (e) => {
         e.preventDefault();
         if (!locations.includes(location)) {
             setError("Please select a valid location");
             return;
         }
         setError("");
-        const url =
-            "/weather/" + new URLSearchParams({ latlon: latLon }).get("latlon");
-        const data = await fetchData(url);
-        setWeather(data);
+        setWeatherURL(
+            "/weather/" + new URLSearchParams({ latlon: latLon }).get("latlon")
+        );
     };
 
     const handleNewLocation = (e) => {
@@ -87,12 +83,45 @@ function Locator() {
         setWeather({});
         setLocation("");
         setLocations([]);
+        setLocationsURL("");
+        setWeatherURL("");
         setError("");
     };
 
     useEffect(() => {
         geolocationAvailable();
     }, []);
+
+    useEffect(() => {
+        if (weatherURL !== "") {
+            const getData = async () => {
+                const data = await fetchData(weatherURL);
+                setWeather(data);
+            };
+            getData();
+        }
+    }, [weatherURL]);
+
+    useEffect(() => {
+        let active = true;
+        if (locationsURL !== "" && active) {
+            const getData = async () => {
+                const data = await fetchData(locationsURL);
+                !locations.includes(location) &&
+                    data.features &&
+                    setLocations(
+                        data.features.map((result) => result.place_name)
+                    );
+                const lat = data.features[0].geometry.coordinates[1];
+                const lon = data.features[0].geometry.coordinates[0];
+                setLatLon(lat + "," + lon);
+            };
+            getData();
+        }
+        return () => {
+            active = false;
+        };
+    }, [locationsURL]);
 
     return (
         <>
