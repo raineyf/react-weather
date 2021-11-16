@@ -38,14 +38,19 @@ function Locator() {
         }
     };
 
+    const fetchData = async (url) => {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    };
+
     const handleLocationChange = async (e) => {
         setLocation(e.target.value);
         if (e.target.value.length >= 1) {
             const url =
                 "/locations/" +
                 new URLSearchParams({ string: e.target.value }).get("string");
-            const res = await fetch(url);
-            const data = await res.json();
+            const data = await fetchData(url);
             !locations.includes(e.target.value) &&
                 data.features &&
                 setLocations(data.features.map((result) => result.place_name));
@@ -60,8 +65,7 @@ function Locator() {
         const url =
             "/weather/" +
             new URLSearchParams({ latlon: currentLatLon }).get("latlon");
-        const res = await fetch(url);
-        const data = await res.json();
+        const data = await fetchData(url);
         setWeather(data);
     };
 
@@ -74,8 +78,7 @@ function Locator() {
         setError("");
         const url =
             "/weather/" + new URLSearchParams({ latlon: latLon }).get("latlon");
-        const res = await fetch(url);
-        const data = await res.json();
+        const data = await fetchData(url);
         setWeather(data);
     };
 
