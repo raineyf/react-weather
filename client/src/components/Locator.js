@@ -153,7 +153,7 @@ function Locator() {
                                 name="location"
                                 id="location"
                                 value={location}
-                                placeholder="For example, New York City"
+                                placeholder="For example, New York"
                                 onChange={handleLocationChange}
                                 pattern={locations.join("|")}
                                 autoComplete="off"
